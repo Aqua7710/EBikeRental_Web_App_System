@@ -1,4 +1,6 @@
-﻿namespace EBikeRental_Web_App_System.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EBikeRental_Web_App_System.Models
 {
     public class Rental
     {

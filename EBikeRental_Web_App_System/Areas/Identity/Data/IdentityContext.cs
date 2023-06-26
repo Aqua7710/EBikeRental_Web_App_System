@@ -25,6 +25,16 @@ public class IdentityContext : IdentityDbContext<EBikeRental_Web_App_SystemUser>
     }
 
     public DbSet<EBikeRental_Web_App_System.Models.Bike> Bike { get; set; } = default!;
+
+    public DbSet<EBikeRental_Web_App_System.Models.Customer> Customer { get; set; } = default!;
+
+    public DbSet<EBikeRental_Web_App_System.Models.Payment> Payment { get; set; } = default!;
+
+    public DbSet<EBikeRental_Web_App_System.Models.PaymentsType> PaymentsType { get; set; } = default!;
+
+    public DbSet<EBikeRental_Web_App_System.Models.Rental> Rental { get; set; } = default!;
+
+    public DbSet<EBikeRental_Web_App_System.Models.Staff> Staff { get; set; } = default!;
 }
 
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<EBikeRental_Web_App_SystemUser>
