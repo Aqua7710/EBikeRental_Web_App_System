@@ -20,10 +20,22 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var identityContext = _context.Customer.Include(c => c.Payment);
-            return View(await identityContext.ToListAsync());
+            if(_context.Customer == null)
+            {
+                return Problem("Entity set 'IdentityContext.Customer' is null.");
+            }
+
+            var customer = from c in _context.Customer
+                           select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customer = customer.Where(s => s.LastName!.Contains(searchString));
+            }
+
+            return View(await customer.ToListAsync());
         }
 
         // GET: Customers/Details/5
