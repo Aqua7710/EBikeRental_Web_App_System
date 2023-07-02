@@ -4,6 +4,7 @@ namespace EBikeRental_Web_App_System.Models
 {
     public class PaymentsType
     {
+        [Key]
         [Display(Name = "Payment Type ID")]
         public int PaymentsTypeId { get; set; }
         [Display(Name = "Payment Type")]

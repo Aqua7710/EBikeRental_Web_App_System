@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EBikeRental_Web_App_System.Areas.Identity.Data;
 using EBikeRental_Web_App_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EBikeRental_Web_App_System.Controllers
 {
+    [Authorize]
     public class PaymentsController : Controller
     {
         private readonly IdentityContext _context;
@@ -59,7 +61,7 @@ namespace EBikeRental_Web_App_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PaymentId,TotalCost,PaymentsTypeId,PaymentDate,PaymentStatus")] Payment payment)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(payment);
                 await _context.SaveChangesAsync();
@@ -98,7 +100,7 @@ namespace EBikeRental_Web_App_System.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

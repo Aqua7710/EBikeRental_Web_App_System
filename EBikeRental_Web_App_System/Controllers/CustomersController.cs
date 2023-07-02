@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EBikeRental_Web_App_System.Areas.Identity.Data;
 using EBikeRental_Web_App_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EBikeRental_Web_App_System.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         private readonly IdentityContext _context;
@@ -22,20 +24,23 @@ namespace EBikeRental_Web_App_System.Controllers
         // GET: Customers
         public async Task<IActionResult> Index(string searchString)
         {
-            if(_context.Customer == null)
+            /*if (_context.Customer == null)
             {
-                return Problem("Entity set 'IdentityContext.Customer' is null.");
+                return Problem("Entity set 'IdentityContext.Customers'  is null.");
             }
 
-            var customer = from c in _context.Customer
-                           select c;
+            var customers = from c in _context.Customer
+                            select c;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                customer = customer.Where(s => s.LastName!.Contains(searchString));
+                customers = customers.Where(s => s.LastName!.StartsWith(searchString));
             }
 
-            return View(await customer.ToListAsync());
+            return View(await customers.ToListAsync());*/
+
+            var identityContext = _context.Customer.Include(c => c.Payment);
+            return View(await identityContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -71,7 +76,7 @@ namespace EBikeRental_Web_App_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,Phone,Email,Address,Dob,BikeRentalActive,PaymentId")] Customer customer)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
@@ -110,7 +115,7 @@ namespace EBikeRental_Web_App_System.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

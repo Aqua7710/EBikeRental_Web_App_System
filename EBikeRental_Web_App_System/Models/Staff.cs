@@ -6,19 +6,30 @@ namespace EBikeRental_Web_App_System.Models
     {
         [Display(Name = "Staff ID")]
         public int StaffId { get; set; }
+        [StringLength(255)]
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = null!;
         [Display(Name = "Last Name")]
+        [StringLength(255)]
+        [Required]
         public string LastName { get; set; } = null!;
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(128, MinimumLength = 1)]
         public string Email { get; set; } = null!;
         [Display(Name = "Phone")]
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(11, MinimumLength = 6)]
         public string Phone { get; set; } = null!;
-        [Display(Name = "Manager ID")]
-        public int ManagerId { get; set; }
         [Display(Name = "Address")]
+        [StringLength(128, MinimumLength = 3)]
         public string Address { get; set; } = null!;
 
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
         public virtual ICollection<Rental> Rentals { get; set; } = new List<Rental>();
     }
 }

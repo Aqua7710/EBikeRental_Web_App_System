@@ -12,7 +12,8 @@ namespace EBikeRental_Web_App_System.Models
         public string BikeSpecs { get; set; } = null!;
         [Display(Name = "Stock Quantity")]
         public double StockQuantity { get; set; }
-        [Display(Name = "Cost per dayW")]
+        [Display(Name = "Cost per day")]
+        [DataType(DataType.Currency)]
         public decimal CostPerDay { get; set; }
 
         public virtual ICollection<Rental> Rentals { get; set; } = new List<Rental>();

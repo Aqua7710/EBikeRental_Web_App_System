@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EBikeRental_Web_App_System.Areas.Identity.Data;
 using EBikeRental_Web_App_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EBikeRental_Web_App_System.Controllers
 {
+    [Authorize]
     public class StaffsController : Controller
     {
         private readonly IdentityContext _context;

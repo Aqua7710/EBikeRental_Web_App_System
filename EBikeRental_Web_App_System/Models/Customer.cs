@@ -6,6 +6,7 @@ namespace EBikeRental_Web_App_System.Models
 {
     public class Customer
     {
+        [Display(Name = "Customer ID")]
         public int CustomerId { get; set; }
         [StringLength(255)]
         [Required]
@@ -32,9 +33,13 @@ namespace EBikeRental_Web_App_System.Models
         public DateTime Dob { get; set; }
         [Display(Name = "Bike Rental Active")]
         public bool? BikeRentalActive { get; set; }
-        [Display(Name = "Payment ID")]
+        
         public int PaymentId { get; set; }
-
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
+        [Display(Name = "Payment ID")]
         public virtual Payment Payment { get; set; } = null!;
 
         public virtual ICollection<Rental> Rentals { get; set; } = new List<Rental>();

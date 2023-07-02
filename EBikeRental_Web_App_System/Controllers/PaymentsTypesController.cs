@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EBikeRental_Web_App_System.Areas.Identity.Data;
 using EBikeRental_Web_App_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EBikeRental_Web_App_System.Controllers
 {
@@ -46,6 +47,7 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: PaymentsTypes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +70,7 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: PaymentsTypes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.PaymentsType == null)
@@ -119,6 +122,7 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: PaymentsTypes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.PaymentsType == null)
