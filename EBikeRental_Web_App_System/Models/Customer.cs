@@ -36,7 +36,7 @@ namespace EBikeRental_Web_App_System.Models
 
 
         [Display(Name = "Address")]
-        [StringLength(128, MinimumLength = 1)]
+        [StringLength(128, MinimumLength = 3)] 
         public string Address { get; set; } = null!; // address  max: 128, min: 1
 
 
@@ -45,8 +45,8 @@ namespace EBikeRental_Web_App_System.Models
         public DateTime Dob { get; set; } // dob
 
 
-        [Display(Name = "Bike Rental Active (True/False)")]
-        public bool? BikeRentalActive { get; set; } // bike rental active
+        [Display(Name = "Bike Rental Active")]
+        public bool BikeRentalActive { get; set; } // bike rental active
 
 
         

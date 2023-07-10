@@ -43,10 +43,10 @@
                 <input asp-for="Dob" class="form-control" />
                 <span asp-validation-for="Dob" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="BikeRentalActive" class="control-label"></label>
-                <input asp-for="BikeRentalActive" class="form-control" />
-                <span asp-validation-for="BikeRentalActive" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BikeRentalActive" /> @Html.DisplayNameFor(model => model.BikeRentalActive)
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="PaymentId" class="control-label"></label>

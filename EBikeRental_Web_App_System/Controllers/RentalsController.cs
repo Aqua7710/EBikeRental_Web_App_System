@@ -69,9 +69,9 @@ namespace EBikeRental_Web_App_System.Controllers
         // GET: Rentals/Create
         public IActionResult Create()
         {
-            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeId");
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId");
-            ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "StaffId");
+            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeModel");
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName");
+            ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "FullName");
             return View();
         }
 
@@ -107,9 +107,9 @@ namespace EBikeRental_Web_App_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeId", rental.BikeId);
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", rental.CustomerId);
-            ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "StaffId", rental.StaffId);
+            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeModel", rental.BikeId);
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName", rental.CustomerId);
+            ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "FullName", rental.StaffId);
             return View(rental);
         }
 

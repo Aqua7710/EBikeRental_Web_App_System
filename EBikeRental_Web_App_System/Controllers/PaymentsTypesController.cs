@@ -21,11 +21,22 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: PaymentsTypes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.PaymentsType != null ? 
-                          View(await _context.PaymentsType.ToListAsync()) :
-                          Problem("Entity set 'IdentityContext.PaymentsType'  is null.");
+            if (_context.PaymentsType == null)
+            {
+                return Problem("Entity set 'IdentityContext.PaymentTypes' is null.");
+            }
+
+            IQueryable<PaymentsType> paymentTypes = _context.PaymentsType; // Use IQueryable instead of var for explicit typing
+
+            if (!String.IsNullOrEmpty(searchString)) // search filter for payment dates
+            {
+                paymentTypes = paymentTypes.Where(p => p.PaymentType.Contains(searchString));
+            }
+
+            var paymentTypeList = await paymentTypes.ToListAsync();
+            return View(paymentTypeList);
         }
 
         // GET: PaymentsTypes/Details/5
