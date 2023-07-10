@@ -24,24 +24,24 @@ namespace EBikeRental_Web_App_System.Controllers
         // GET: Customers
         public async Task<IActionResult> Index(string searchString)
         {
-            /*if (_context.Customer == null)
+            if (_context.Customer == null)
             {
-                return Problem("Entity set 'IdentityContext.Customers'  is null.");
+                return Problem("Entity set 'IdentityContext.Customers' is null.");
             }
 
-            var customers = from c in _context.Customer
-                            select c;
+            IQueryable<Customer> customers = _context.Customer; // Use IQueryable instead of var for explicit typing
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString)) // search for customers first name or last name that contain search value
             {
-                customers = customers.Where(s => s.LastName!.StartsWith(searchString));
+                customers = customers.Where(c => c.FirstName.Contains(searchString) || c.LastName.Contains(searchString));
             }
 
-            return View(await customers.ToListAsync());*/
+            customers = customers.Include(c => c.Payment); // Include Payment navigation property
 
-            var identityContext = _context.Customer.Include(c => c.Payment);
-            return View(await identityContext.ToListAsync());
+            var customerList = await customers.ToListAsync();
+            return View(customerList);
         }
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)

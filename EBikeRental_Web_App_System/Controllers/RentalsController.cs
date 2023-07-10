@@ -22,10 +22,27 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: Rentals
-        public async Task<IActionResult> Index()
-        {
-            var identityContext = _context.Rental.Include(r => r.Bike).Include(r => r.Customer).Include(r => r.Staff);
-            return View(await identityContext.ToListAsync());
+        public async Task<IActionResult> Index(string searchString)
+        {   
+            if (_context.Rental == null)
+            {
+                return Problem("Entity set 'IdentityContext.Rentals' is null.");
+            }
+
+            IQueryable<Rental>rentals = _context.Rental; // Use IQueryable instead of var for explicit typing
+
+            if (!String.IsNullOrEmpty(searchString)) // search for staffs or customers last name that contain search value
+            {
+                rentals = rentals.Where(r => r.Customer.LastName.Contains(searchString) || r.Staff.LastName.Contains(searchString));
+            }
+
+            // Include bike, customer, and staff navigation property
+            rentals = rentals.Include(r => r.Bike);
+            rentals = rentals.Include(r => r.Customer);
+            rentals = rentals.Include(r => r.Staff);
+
+            var rentalList = await rentals.ToListAsync();
+            return View(rentalList);
         }
 
         // GET: Rentals/Details/5

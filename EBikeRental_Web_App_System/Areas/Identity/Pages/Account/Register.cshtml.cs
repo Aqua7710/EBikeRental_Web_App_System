@@ -73,7 +73,7 @@ namespace EBikeRental_Web_App_System.Areas.Identity.Pages.Account
         {
             [Required]
             [StringLength(255, ErrorMessage = "the first name field should have a max of 255 characters")]
-            [Display(Name = "FirstName")]
+            [Display(Name = "FirstName")]   
             public string FirstName { get; set; }
 
             [Required]

@@ -22,11 +22,22 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: Bikes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Bike != null ? 
-                          View(await _context.Bike.ToListAsync()) :
-                          Problem("Entity set 'IdentityContext.Bike'  is null.");
+            if (_context.Bike == null)
+            {
+                return Problem("Entity set 'IdentityContext.Bikes' is null.");
+            }
+
+            IQueryable<Bike> bikes = _context.Bike; // Use IQueryable instead of var for explicit typing
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bikes = bikes.Where(c => c.BikeModel.Contains(searchString));
+            }
+
+            var bikeList = await bikes.ToListAsync();
+            return View(bikeList);
         }
 
         // GET: Bikes/Details/5

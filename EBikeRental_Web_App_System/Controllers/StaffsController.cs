@@ -22,11 +22,22 @@ namespace EBikeRental_Web_App_System.Controllers
         }
 
         // GET: Staffs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Staff != null ? 
-                          View(await _context.Staff.ToListAsync()) :
-                          Problem("Entity set 'IdentityContext.Staff'  is null.");
+            if (_context.Staff == null)
+            {
+                return Problem("Entity set 'IdentityContext.Staffs' is null.");
+            }
+
+            IQueryable<Staff> staffs = _context.Staff; // Use IQueryable instead of var for explicit typing
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                staffs = staffs.Where(c => c.FirstName.Contains(searchString) || c.LastName.Contains(searchString));
+            }
+
+            var staffList = await staffs.ToListAsync();
+            return View(staffList);
         }
 
         // GET: Staffs/Details/5
