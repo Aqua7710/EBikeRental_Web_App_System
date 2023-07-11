@@ -65,7 +65,7 @@ namespace EBikeRental_Web_App_System.Controllers
         public IActionResult Create()
         {
 
-            ViewData["PaymentsTypeId"] = new SelectList(_context.Set<PaymentsType>(), "PaymentsTypeId", "PaymentType");
+            ViewData["PaymentsTypeId"] = new SelectList(_context.Set<PaymentsType>(), "PaymentsTypeId", "PaymentType"); // display payment type instead of id
             return View();
         }
 

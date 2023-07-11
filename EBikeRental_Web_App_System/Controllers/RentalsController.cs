@@ -69,9 +69,9 @@ namespace EBikeRental_Web_App_System.Controllers
         // GET: Rentals/Create
         public IActionResult Create()
         {
-            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeModel");
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName");
-            ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "FullName");
+            ViewData["BikeId"] = new SelectList(_context.Bike, "BikeId", "BikeModel"); // display bike model instead of bike id
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FullName"); // display customer full name instead of customer id
+			ViewData["StaffId"] = new SelectList(_context.Set<Staff>(), "StaffId", "FullName"); // display staff full name instead of staff id
             return View();
         }
 
