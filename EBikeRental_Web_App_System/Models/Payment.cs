@@ -11,9 +11,9 @@ namespace EBikeRental_Web_App_System.Models
 
         [Display(Name = "Total Cost")]
         [DataType(DataType.Currency)]
-        [Range(minimum: 0, maximum: 999999)]
+        [Range(minimum: 0, maximum: 999)]
         [Required]
-        public decimal TotalCost { get; set; } // total cost (type: currency), min: $0, max: $999999
+        public decimal TotalCost { get; set; } // total cost (type: currency), min: $0, max: $999
 
 
         public int PaymentsTypeId { get; set; }

@@ -6,12 +6,12 @@ namespace EBikeRental_Web_App_System.Models
     {
         [Display(Name = "Staff ID")]
         public int StaffId { get; set; }
-        [StringLength(255)]
+        [StringLength(50, MinimumLength = 1)]
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = null!;
         [Display(Name = "Last Name")]
-        [StringLength(255)]
+        [StringLength(50, MinimumLength = 1)]
         [Required]
         public string LastName { get; set; } = null!;
         [Display(Name = "Email")]

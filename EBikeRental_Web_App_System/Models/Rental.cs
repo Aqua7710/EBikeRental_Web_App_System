@@ -17,9 +17,9 @@ namespace EBikeRental_Web_App_System.Models
 
 
         [Display(Name = "Borrow Duration")]
-        [Range(maximum: 90, minimum: 0)]
+        [Range(maximum: 90, minimum: 1)]
         [Required]
-        public double BorrowDuration { get; set; } // borrow duration max: 90 (days), min: 0
+        public double BorrowDuration { get; set; } // borrow duration max: 90 (days), min: 1 (day)
 
 
         [Display(Name = "Staff ID")]
