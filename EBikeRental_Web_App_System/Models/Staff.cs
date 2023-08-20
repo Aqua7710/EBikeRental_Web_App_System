@@ -21,7 +21,8 @@ namespace EBikeRental_Web_App_System.Models
         [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(11, MinimumLength = 6)]
-        public string Phone { get; set; } = null!;
+		[RegularExpression("^[0-9]+$", ErrorMessage = "Only numbers are allowed.")]
+		public string Phone { get; set; } = null!;
         [Display(Name = "Address")]
         [StringLength(128, MinimumLength = 3)]
         public string Address { get; set; } = null!;

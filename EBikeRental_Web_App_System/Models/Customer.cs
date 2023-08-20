@@ -26,6 +26,7 @@ namespace EBikeRental_Web_App_System.Models
         [Required]
         [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression("^[0-9]+$")]
         public string Phone { get; set; } = null!; // phone number max: 11, min: 6
 
 
